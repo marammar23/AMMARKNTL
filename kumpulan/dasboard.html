@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background-color: #41668c;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            color: white;
+        }
+
+        .sidebar h2 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            margin: 10px 0;
+            padding: 10pxx;
+            display: block;
+            background-color: #34495e;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Main content styling */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: #ecf0f1;
+            padding: 20px;
+            width: 30%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+            .cards {
+                flex-direction: column;
+            }
+            .card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="#">Home</a>
+        <a href="#">Analytics</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            Welcome to the Dashboard
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Certificate HTML</Html></h3>
+                <p>Let's See My Certificate</p>
+                    <img src="sertiHTML.jpeg" width="120">
+                    <br><a href="sertiHTML.jpeg">klik disini</a>
+            </div>
+            <div class="card">
+                <h3>Certificate CSS</h3>
+                <p>Let's See My Certificate</p>
+                <img src="sertiCSS.jpeg" width="120">
+                <br><a href="sertiCSS.jpeg">klik disini</a>
+            </div>
+            <div class="card">
+                <h3>Certificate JAVA SCRIPT</h3>
+                <p>Let's See My Certificate</p>
+                <img src="sertiJAVA.jpeg" width="120">
+                <br><a href="sertiJAVA.jpeg">klik disini</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
