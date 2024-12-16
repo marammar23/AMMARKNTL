@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Penjualan</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    canvas {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard Penjualan</h1>
+  </header>
+  
+  <div class="container">
+    <!-- Diagram Garis -->
+    <h2>Tren Penjualan Harian</h2>
+    <canvas id="lineChart"></canvas>
+    
+    <!-- Diagram Batang -->
+    <h2>Penjualan Per Produk</h2>
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <script>
+    // Data Dummy untuk Diagram
+    const salesData = {
+      dates: ["2024-12-01", "2024-12-02", "2024-12-03", "2024-12-04"],
+      revenue: [1000, 1500, 1200, 1700],
+      products: ["Produk A", "Produk B", "Produk C"],
+      productSales: [3000, 4000, 3500],
+    };
+
+    // Konfigurasi Diagram Garis
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: salesData.dates,
+        datasets: [{
+          label: 'Pendapatan (Rp)',
+          data: salesData.revenue,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Tren Pendapatan Harian'
+          }
+        }
+      }
+    });
+
+    // Konfigurasi Diagram Batang
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: salesData.products,
+        datasets: [{
+          label: 'Penjualan (Rp)',
+          data: salesData.productSales,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)'
+          ],
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Penjualan Per Produk'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
