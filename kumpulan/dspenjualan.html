@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Penjualan</title>
+  <title>Dashboard Penjualan Tahunan</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
+      background-color: #f9f9f9;
     }
     header {
       background-color: #007bff;
@@ -22,47 +22,62 @@
       max-width: 1200px;
       margin: 20px auto;
       padding: 20px;
-      background: #fff;
+      background: #ffffff;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     canvas {
       margin: 20px 0;
     }
+    .chart-container {
+      margin-bottom: 40px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Dashboard Penjualan</h1>
+    <h1>Dashboard Penjualan Tahunan</h1>
   </header>
   
   <div class="container">
     <!-- Diagram Garis -->
-    <h2>Tren Penjualan Harian</h2>
-    <canvas id="lineChart"></canvas>
+    <div class="chart-container">
+      <h2>Tren Penjualan Bulanan</h2>
+      <canvas id="lineChart"></canvas>
+    </div>
     
     <!-- Diagram Batang -->
-    <h2>Penjualan Per Produk</h2>
-    <canvas id="barChart"></canvas>
+    <div class="chart-container">
+      <h2>Penjualan per Produk</h2>
+      <canvas id="barChart"></canvas>
+    </div>
+    
+    <!-- Diagram Pie -->
+    <div class="chart-container">
+      <h2>Distribusi Penjualan Regional</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
   </div>
 
   <script>
-    // Data Dummy untuk Diagram
-    const salesData = {
-      dates: ["2024-12-01", "2024-12-02", "2024-12-03", "2024-12-04"],
-      revenue: [1000, 1500, 1200, 1700],
-      products: ["Produk A", "Produk B", "Produk C"],
-      productSales: [3000, 4000, 3500],
+    // Data Dummy untuk Penjualan Tahunan
+    const yearlySalesData = {
+      months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      sales: [10000, 12000, 15000, 14000, 17000, 16000, 20000, 22000, 25000, 24000, 23000, 21000],
+      products: ["Produk A", "Produk B", "Produk C", "Produk D"],
+      productSales: [50000, 30000, 40000, 20000],
+      regions: ["Region 1", "Region 2", "Region 3", "Region 4"],
+      regionalSales: [40000, 35000, 30000, 25000]
     };
 
-    // Konfigurasi Diagram Garis
+    // Diagram Garis - Penjualan Bulanan
     const lineCtx = document.getElementById('lineChart').getContext('2d');
     new Chart(lineCtx, {
       type: 'line',
       data: {
-        labels: salesData.dates,
+        labels: yearlySalesData.months,
         datasets: [{
           label: 'Pendapatan (Rp)',
-          data: salesData.revenue,
+          data: yearlySalesData.sales,
           borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderWidth: 2,
@@ -76,30 +91,32 @@
           },
           title: {
             display: true,
-            text: 'Tren Pendapatan Harian'
+            text: 'Tren Penjualan Bulanan'
           }
         }
       }
     });
 
-    // Konfigurasi Diagram Batang
+    // Diagram Batang - Penjualan per Produk
     const barCtx = document.getElementById('barChart').getContext('2d');
     new Chart(barCtx, {
       type: 'bar',
       data: {
-        labels: salesData.products,
+        labels: yearlySalesData.products,
         datasets: [{
           label: 'Penjualan (Rp)',
-          data: salesData.productSales,
+          data: yearlySalesData.productSales,
           backgroundColor: [
             'rgba(255, 99, 132, 0.5)',
             'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)'
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
           ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)'
           ],
           borderWidth: 1,
         }]
@@ -112,7 +129,39 @@
           },
           title: {
             display: true,
-            text: 'Penjualan Per Produk'
+            text: 'Penjualan per Produk'
+          }
+        }
+      }
+    });
+
+    // Diagram Pie - Distribusi Penjualan Regional
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: yearlySalesData.regions,
+        datasets: [{
+          label: 'Penjualan (Rp)',
+          data: yearlySalesData.regionalSales,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
+          ],
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Distribusi Penjualan Regional'
           }
         }
       }
